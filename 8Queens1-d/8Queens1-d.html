@@ -1,0 +1,63 @@
+<h1> 1-D 8 Queens </h1>
+
+<h3> Problem Statement: </h3>
+<p>
+    Suppose we have a standard chess board, and 8 queens. Find all possible placements of queens such that they do not
+    attack each other.
+    <br>
+    Note:
+    <ul>
+        <li>The dimentions of a standard chessboard are 8 by 8.</li>
+        <li>One queen can attack another if they are directly vertical, horizontal, or diagonal from one another.</li>
+    </ul>
+</p>
+
+<figure>
+    <img src="../resources/imgs/eightqueens-1.png">
+    <figcaption>
+        One of many valid placements for 8 queens. Red arrows represents how a queen can attack.
+        <br>
+        Image taken from CodeStepByStep.com
+    </figcaption>
+</figure>
+
+<h3> Data Structure: </h3>
+<p>
+    Intuitively, representing a chessboard would done using a 2-d matrix. 
+    However, lets trade intuition for simplicity.
+</p>
+<figure>
+    <img src = "../resources/imgs/queens1-DExample.png">
+    <figcaption> The above 2-D representation transformed into a 1-D representation. The numbers represent the position (the row) of the queens,
+        starting at zero.
+    </figcaption>
+</figure>
+
+<p>
+    The algorithm is as follows:
+    <ol>
+        <li>Start with an array of size 8, all of the elements in the array are initialized to zero. </li>
+        <li>Starting with the current queen (the first queen if this is our first iteration), 
+            check to see if the queen is in a valid spot. Note: Checking will only occur to the left of the queen
+            (assume everyting to the right of the queen has not been placed yet).
+        </li>
+        <ol>
+            <li>If the queen is in a valid spot, move to the next column (to the right) and repeat 2</li>
+            <li>If the queen is not in a valid spot, move the queen to the next row.</li>
+        </ol>
+        <li>If during the process of moving to the right we go beyond the board, print the board and backtrack.</li>
+        <li>If during this process of moving the queen to next row, we go beyond the board, backtrack.</li>
+    </ol>
+</p>
+
+<p> link to a template to do this homework:
+    <a href = "https://repl.it/@CerverizzoE/8queens-1d-template-for-student-use" target = "_blank">Here</a>
+</p>
+
+<h3>Some extra stuff:</h3>
+<p> 
+    This problem can actually become more general, for example, instead of solving the 8 queens problem, what about 7 queens on a 7x7 board? 
+    10 queens on a 10x10 board?
+    <br>
+    How about <a href = "https://leetcode.com/problems/n-queens/"> n queens </a> on a nxn board?
+</p>
