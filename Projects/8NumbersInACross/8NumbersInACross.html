@@ -1,6 +1,12 @@
 
+<head>
+    <title> CS211 Waxman & Cerverizzo </title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
 
 <h1> 8 numbers in a cross </h1>
+
+<p> link to the template <a href = "#">here</a></p>
 
 
 <h3> Problem Statement: </h3>
@@ -25,4 +31,22 @@
 
 <p>
     Just like in the 8 queens problem we are going to be using backtracking.
+    <br>
 </p>
+
+<h3> Algorithm: </h3>
+<ol>
+    <li> Start with an array of all 1s. Though, as we move from lower indexs to higher indexs, we will treat lower indexs as the only numbers that have been placed on the cross.</li>
+    <li> While we have not backtracked off the board:</li>
+        <ol>
+            <li> If during this process, we move beyond the last index of the cross, print the cross. </li>
+            <li> If during this process, the current index exceeds 8, reset the value back to 1 and backtrack.</li>
+            <li>
+                If the current number is valid (again, only checking indices lower than the current index), move to the next index in the cross.
+            </li>
+            <li>
+                if the current number is not valid, increment the current number.
+            </li>
+        </ol>
+
+</ol>
