@@ -1,8 +1,65 @@
+<head>
+    <Title>Stable Marriage</Title>
+
+</head>
+
 
 <h1>Stable Marriage</h1>
 
-<p> Note: The stable matching problem is very well known with a very well known solution, called the Gale-Shapley Algorithm. 
+<p> 
+    <a href="https://repl.it/@CerverizzoE/StableMarriage-iterative-for-StudentUse">Template for homework</a>
+    <br>
+    Note: The stable matching problem is very well known with a very well known solution, called the <a href="https://www.nobelprize.org/uploads/2018/06/popular-economicsciences2012.pdf" target="_blank">Gale-Shapley Algorithm (link shows importance of stable matching).</a><br>
+    <a href="https://www.youtube.com/watch?v=Qcv1IqHWAzg" target="_blank">Video how explaining how it works.</a>
+
     The solution presented in lecture is backtracking, not Gale-Shapley, which you will cover in CS323 (algorithms).
+</p>
+<br>
+
+<h3>The Problem</h3>
+<p> 
+    Suppose we have n men and n woman, each with their own preference for the opposite sex. <br>
+    Can we create a matching such that there is no unstable pairings? <br> <br>
+
+    What is an unstable pairing?:<br><br>
+
+    An unstable pairing is one where a man likes another woman more than his current partner and that same woman likes 
+    that same man more than her current partner (In which case they would run away together--hence the unstable pairing).    
+
 </p>
 
 
+
+<h3>The Algorithm</h3>
+Like 8 Queens and 8 numbers in a cross, the solution is backtracking.<br>
+
+
+<ol>
+    <li>Start with a default array (an array set to all zero in this case). </li>
+    <li>Begin pairing up the first man and first avalibe woman (a pair in this case is used by the matching array, the index represents the man, the value at that index represent the woman). </li>
+    <li>If we have backtracked beyond the first pairing, terminate.</li>
+    <li>If we match all people</li>
+        <ol>
+            <li>print the matching</li>
+            <li>backtrack</li>
+            <li>Go back to 3.</li>
+        </ol> 
+    <li>Next, pair the next man and the next avalibe woman.</li>
+    <li>Check to see if there is an unstable matching.</li>
+    <ol>
+        <li>If there is not </li>
+        Go back to 3.
+        <li> there is a unstable matching</li>
+        Pair the man with the next avalibe woman. 
+        If there are no more avalible woman, backtrack (in this case backtracking means breaking up the current couple, and matching the man with the next avalibe woman).
+
+        Go back to 3.
+    </ol>
+</ol>
+
+<p>The correct output is displayed below.</p>
+<figure>
+    <img src="output.PNG" alt="correctOutput">
+    <figcaption>Correct output</figcaption>
+
+</figure>
