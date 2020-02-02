@@ -20,7 +20,8 @@ class quoteGenerator{
             ["When you know about something it stops being a nightmare. When you know how to fight something, it stops being so threatening.","Andrzej Sapkowski"],
             ["What senses do we lack that we cannot see or hear another world all around us?","Frank Herbert"],
             ["Hope clouds observation.","Frank Herbert"],
-            ["Only put off until tomorrow what you are willing to die having left undone.","Pablo Picasso"]
+            ["Only put off until tomorrow what you are willing to die having left undone.","Pablo Picasso"],
+            ["If you know the enemy and know yourself, you need not fear the result of a hundred battles.", "Sun Tzu"]
           ];
     }
     
