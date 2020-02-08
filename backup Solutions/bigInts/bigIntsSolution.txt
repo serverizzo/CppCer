@@ -1,0 +1,100 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+void print(int a[], int size){
+  for(int i = 0; i < size; i++){
+    cout << a[i];
+  }
+  cout <<endl;
+}
+
+string addBigInts(string a, string b){
+
+  int aidx = a.length();
+  int bidx = b.length();
+
+  // cout << aidx <<endl;
+  // cout << bidx <<endl;
+
+  int arrSize = max(aidx,bidx) + 1;
+  int * arr = new int[arrSize]; // dynamically declare an array of zeros;
+
+  // print(arr, arrSize);
+
+  int sum, carry = 0, first, second, curr = arrSize - 1;
+  // start from last index
+  aidx -= 1;
+  bidx -= 1;
+
+  // print(arr, arrSize);
+
+
+  while (curr > -1){
+    if(aidx > -1){
+      first = (int)a[aidx] - (int)'0';
+    }
+    else{
+      first = 0;
+    }
+    if(bidx > -1){
+      second = (int)b[bidx] - int('0');
+    }
+    else{
+      second = 0;
+    }
+    sum = first + second + carry;
+    if ( sum > 9 ){
+      carry = 1;
+      sum -= 10;
+    }
+    else{
+      carry = 0;
+    }
+
+    arr[curr] = sum;
+    curr -= 1;
+    aidx -= 1;
+    bidx -= 1;
+    sum = 0;
+  }
+
+  // print(arr, arrSize);
+
+
+  string ans = "";
+
+  for(int i = 0; i < arrSize; i++){
+    if ((arr[0] == 0) and (i == 0)){
+      continue;
+    }
+    else{
+      ans += to_string(arr[i]);
+    }
+    // cout << i <<endl;
+  }
+
+  return ans;
+}
+
+
+
+int main() {
+
+
+  cout << (addBigInts("1243", "5321") == "6564") << endl;
+  cout << (addBigInts("39725", "33") == addBigInts("33", "39725")) << endl;
+  cout << (addBigInts("123", "99") == "222") << endl;
+  cout << (addBigInts("100", "900")  == "1000") << endl;
+  cout << (addBigInts("111111111111111111111111111111111111111111111111", "22") == "111111111111111111111111111111111111111111111133") << endl;
+
+
+
+  cout << "finished" <<endl;
+
+
+  return 0;
+
+}

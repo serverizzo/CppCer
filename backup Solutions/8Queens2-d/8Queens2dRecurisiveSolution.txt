@@ -1,0 +1,132 @@
+/*
+Notes before starting:
+Empty spaces are denoted by '.' 
+Spaces occupied by a queen are denoted by 'Q'.
+
+The board is repsented by a vector rather than an array. 
+A vector is actually more powerful version of an array, 
+but they fuction exactly the same.
+
+*/
+
+
+#include <vector>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class Solution {
+public:
+    
+    vector<vector<string>> board;
+    int boardSize;
+    int count = 1;
+    
+    
+    vector<vector<string>> createBoard(int n){
+        vector<vector<string>> arr(n, vector<string>(n));
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                arr[i][j] = ".";
+            }
+        }
+        return arr;
+    }
+    
+    void showBoard(){
+        cout<<count++<<"\n";
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                cout<<board[i][j]<< "  ";
+            }
+            cout<<"\n";
+        }
+        cout<<"\n";
+    }
+    
+    bool checkRow(int row, int currCol){
+        // move column by column on a row
+        for(int i = 0; i < currCol; i++){
+            if ( board[row][i] == "Q" ){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool checkDiagonalUp(int row, int currCol){
+
+        for(int i = 1; (row - i > -1) and (currCol - i > -1); i ++) {
+            if (board[row - i][currCol - i] == "Q"){
+                return false;
+            }
+        }
+        return true;       
+    }
+    
+    bool checkDiagonalDown(int row, int currCol){
+
+        for (int i = 0; (row + i < boardSize) and (currCol - i > -1); i++) {
+            if (board[row + i][currCol - i] == "Q"){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool checkAll(int row, int currCol){
+        if ( checkDiagonalDown(row, currCol) and checkRow(row, currCol) and checkDiagonalUp(row, currCol) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    
+    /*
+        Only one queen will occupy a column, so move column by column then row by row. 
+        If we have moved beyond the last column
+        then print the board.
+    */
+    void helper(int currCol){
+
+        // if we continue beyond the last column, add that board to the answer array
+        if ( currCol >= boardSize ){
+            showBoard();
+            return;
+        }
+        
+        // go through each row
+        for( int i = 0; i < boardSize; i++){
+            // place Queen if valid
+            if( checkAll(i, currCol) ){
+                // place Queen
+                board[i][currCol] = "Q";
+                // move to next column
+                helper(currCol + 1);
+                // Remove queen after placeing
+                board[i][currCol] = ".";
+            }
+        }
+        
+        // after moving through all rows, if we cannot place, then we backtrack (move to previous column)
+        // if we backtrack all the way to previous the first column, we are done.
+        
+    }
+    
+    
+    void solveNQueens(int n) {
+        boardSize = n;
+        board = createBoard(boardSize);
+        helper(0);
+    }
+};
+
+int main(){
+  Solution s;
+  s.solveNQueens(8);
+  cout<<"finished";
+  return 0;
+}

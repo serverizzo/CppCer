@@ -1,0 +1,261 @@
+/*
+Notes before starting:
+Empty spaces are denoted by '.' 
+Spaces occupied by a queen are denoted by '='.
+
+The board is repsented by a vector rather than an array. 
+A vector is actually more powerful version of an array, 
+but they fuction exactly the same.
+
+*/
+
+
+#include <vector>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+class Solution {
+public:
+
+    vector<vector<int>> board;
+    int boardSize;
+    int count = 1;
+    
+    typedef char box[5][7];
+    box blackSpace, whiteSpace, *fancyBoard[8][8];
+
+    box wsQueen =  { {' ',' ',' ',' ',' ',' ',' '},
+                     {' ','=',' ','=',' ','=',' '},
+                     {' ','=','=','=','=','=',' '},
+                     {' ','=','=','=','=','=',' '},
+                     {' ',' ',' ',' ',' ',' ',' '} };
+
+    box bsQueen = { {'=','=','=','=','=','=','='},
+                    {'=',' ','=',' ','=',' ','='},
+                    {'=',' ',' ',' ',' ',' ','='},
+                    {'=',' ',' ',' ',' ',' ','='},
+                    {'=','=','=','=','=','=','='} };
+
+
+    Solution(int n){
+      setupFancyPrint();
+      boardSize = n;
+      board = createBoard(boardSize);
+    }
+
+
+    void setupFancyPrint(){
+      //create the blackspace and white space in memory
+      for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 7; j++){
+          blackSpace[i][j] = ' ';
+          whiteSpace[i][j] = '=';
+        }
+      }
+
+      //assign the addresses of each into the fancy board
+      for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+          // all even spaces are white, all odd black
+          if( ((i + j)% 2) == 0 ){
+            //assign the fancy board either the ADDRESS of white or black
+            fancyBoard[i][j] = &whiteSpace;
+          }
+          else{
+            fancyBoard[i][j] = &blackSpace;
+          }
+        }
+      }
+
+    }
+
+    void showFancyBoard(){
+      // setup();
+      cout << "solution #: " << count << endl;
+      count += 1;
+
+      // board row by row,
+      for (int i = 0; i < 8; i++){
+        //box row by row
+        for (int k = 0; k < 5; k++){
+          //board column by column
+          for (int j = 0; j < 8; j++){
+            // box column by column
+            for (int l = 0; l < 7; l++){
+              // if there is a queen, place the correct one
+              if (board[i][j] == 1){
+                // even is whiteSpace
+                if( (i+j)%2 == 1 ){
+                  cout << wsQueen[k][l];
+                }
+                else{
+                  cout << bsQueen[k][l];
+                }
+              }
+              else{
+                cout << (*fancyBoard[i][j])[k][l];
+              }
+            }
+            //make some space between boxes (optional)
+            cout << " ";
+          }
+          // go to the next row
+          cout << endl;
+        }
+        // create some space between rows (optional)
+        // cout <<endl;
+      }
+
+
+      // // Check fancy printing
+      // for (int k = 0; k < 5; k++){
+      //   for (int l = 0; l < 7; l++){
+      //     cout << wsQueen[k][l];
+      //   }
+      //   cout <<endl;
+      // }
+
+      
+      // for (int k = 0; k < 5; k++){
+      //   for (int l = 0; l < 7; l++){
+      //     cout << bsQueen[k][l];
+      //   }
+      //   cout <<endl;
+      // }
+
+      // for (int k = 0; k < 5; k++){
+      //   for (int l = 0; l < 7; l++){
+      //     cout << blackSpace[k][l];
+      //   }
+      //   cout <<endl;
+      // }
+
+      // for (int k = 0; k < 5; k++){
+      //   for (int l = 0; l < 7; l++){
+      //     cout << whiteSpace[k][l];
+      //   }
+      //   cout <<endl;
+      // }
+
+      // // board row by row,
+      // for (int i = 0; i < 8; i++){
+      //   //box row by row
+      //   for (int k = 0; k < 5; k++){
+      //     //board column by column
+      //     for (int j = 0; j < 8; j++){
+      //       // box column by column
+      //       for (int l = 0; l < 7; l++){
+      //         cout << (*fancyBoard[i][j])[k][l];
+      //       }
+      //     }
+      //     cout << endl;
+      //   }
+      // }
+
+
+    }
+
+
+    // Do not touch code below this line and above (look below)...
+
+
+    vector<vector<int>> createBoard(int n){
+        vector<vector<int>> arr(n, vector<int>(n));
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                arr[i][j] = 0;
+            }
+        }
+        return arr;
+    }
+    
+    void showBoard(){
+        cout<<count++<<"\n";
+        for(int i = 0; i < boardSize; i++){
+            for(int j = 0; j < boardSize; j++){
+                cout<<board[i][j]<< "   ";
+            }
+            cout<<"\n \n";
+        }
+        cout<<"\n";
+    }
+    
+    bool checkRow(int row, int currCol){
+        for(int i = 0; i < currCol; i++){
+            if ( board[row][i] == 1 ){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool checkDiagonalUp(int row, int currCol){
+        for(int i = 1; (row - i > -1) and (currCol - i > -1); i ++) {
+            if (board[row - i][currCol - i] == 1){
+                return false;
+            }
+        }
+        return true;       
+    }
+    
+    bool checkDiagonalDown(int row, int currCol){
+
+        for (int i = 0; (row + i < boardSize) and (currCol - i > -1); i++) {
+            if (board[row + i][currCol - i] == 1){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool checkAll(int row, int currCol){
+        if ( checkDiagonalDown(row, currCol) and checkRow(row, currCol) and checkDiagonalUp(row, currCol) ){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    void helper(int currCol){
+
+        if ( currCol >= boardSize ){
+            // showBoard();
+            showFancyBoard();
+            cout << endl;
+            return;
+        }
+
+        for( int i = 0; i < boardSize; i++){
+            if( checkAll(i, currCol) ){
+                board[i][currCol] = 1;
+                helper(currCol + 1);
+                board[i][currCol] = 0;
+            }
+        }
+    }
+    
+    void solveNQueens() {
+        helper(0);
+    }
+
+
+  //...and above this line EXCEPT FOR REPLACING showboard WITH showFancyBoard.
+
+
+
+};
+
+int main(){
+  Solution s(8); // do not modify this line
+  s.solveNQueens();   // uncomment this line when you are ready to check final solution
+
+  // use the rest of main to test your functions as you progrss.
+
+  // s.showFancyBoard();
+
+  cout<<"finished";
+  return 0;
+}

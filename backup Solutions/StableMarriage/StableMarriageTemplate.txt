@@ -1,0 +1,90 @@
+/*
+Notes before starting:
+  0 is the most preferable, 2 is the least (for a 3 men and woman)
+*/
+#include <iostream>
+using namespace std;
+
+struct Solution{
+
+  int n = 3;
+  int matching[3] = {}; // initialize all elements as 0.
+                            //male prefference for woman
+  int mp[3][3] = {{0,2,1},   //man 0 likes woman 0 the most and woman 1 the least.
+                  {0,2,1},
+                  {1,2,0}};   
+  
+  int wp[3][3] = {{2,1,0},
+                  {0,1,2},
+                  {2,0,1}};
+                  
+  void printMatching(){
+    for ( int i = 0; i < n; i++ ){
+      cout << "male: " << i << " and female: " << matching[i] << endl;
+    }
+    cout << endl;
+  }
+
+  bool isAlreadyTaken(int currMale){
+    
+  }
+
+  bool isStable(int curr){
+    
+  }
+
+
+  bool ok(int currMale){
+    if (!isAlreadyTaken(currMale) and isStable(currMale)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+  void solve(){
+
+    //Start with the first male
+    int currMale = 0;
+    // While we have not backtracked beyond the first male:
+    while (currMale > -1){
+      
+      // If all the people have been matched, 
+      if(currMale >= n){
+        // print 
+        // backtrack
+        continue;
+      }
+
+      // If the current male has been matched with all the avalible women
+      if ( /* */ ){
+        //reset current male
+        //backtrack
+        continue;
+      }
+
+      //check if the matching is stable
+      if( ok(currMale) ){
+          // move to the next man
+      }
+      else{
+        // pair the man with the next avalible woman
+
+      }
+    }
+  }
+
+
+
+};
+
+
+
+int main() {
+
+  Solution s;
+  s.solve();
+  std::cout << "finished" <<endl;
+}

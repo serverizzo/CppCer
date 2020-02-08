@@ -1,0 +1,102 @@
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+struct Cross{
+
+  int cross[8] = {1,1,1,1,1,1,1,1}; // the index represents the place on the board. (i.e. the red numbers on the image.)
+
+  int checkArray[8][5] = {
+		{-1},       // position 0
+		{0,-1},     // position 1 checks 0
+		{0,-1},     // position 2 checks 0
+		{0,1,2,-1}, // position 3 checks 0, 1, 2
+		{0,1,3,-1}, // .
+		{1,4,-1},   // .
+		{2,3,4,-1}, // .
+		{3,4,5,6,-1},
+	};
+
+  void printCross(){
+      cout << "   " << cross[0] << "  " << cross[1] << endl;
+      cout << cross[2] << "  " << cross[3] << "  " << cross[4] << "  " << cross[5] << endl;
+      cout << "   " << cross[6] << "  " << cross[7] <<endl;
+      cout<<endl;
+    return;
+  }
+
+  bool alreadyPlaced(int place){
+    for(int i = place - 1 ; i > -1; i--){
+      if( cross[place] == cross[i] ){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool okAdjacent(int place){
+    int i = 0;
+    int placeToCheck;
+    while( checkArray[place][i] != -1 ){
+      placeToCheck = checkArray[place][i];
+      if ((cross[place] == cross[placeToCheck] - 1) or (cross[place] == cross[placeToCheck] + 1)){
+        return false;
+      }
+      i += 1;
+    }
+    return true;
+  }
+
+
+  bool ok(int place){
+    if (!alreadyPlaced(place) and okAdjacent(place)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+
+  void solve(){
+
+    int curr = 0;
+    while ( curr > -1 ){
+      // printCross();
+
+      if ( curr >= 8 ){
+        printCross();
+        curr -= 1;
+        cross[curr] += 1;
+        continue;
+      }
+
+      if( cross[curr] >= 9){
+        cross[curr] = 1;
+        curr -= 1;
+        cross[curr] += 1; }
+
+      else if ( ok(curr) ){
+        curr += 1; }
+        
+      else{
+        cross[curr] += 1; }
+
+
+
+    }
+
+
+  }
+
+};
+
+int main() {
+
+  Cross c;
+  c.solve();
+
+  cout << "finished"<< endl;
+}
