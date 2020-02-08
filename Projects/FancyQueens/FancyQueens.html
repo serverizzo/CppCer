@@ -1,0 +1,68 @@
+<head>
+    <title> CS211 Waxman & Cerverizzo </title>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+
+<h1>Fancy Queens</h1>
+
+<p> <a href="#">Template here</a></p>
+
+
+<h3> Problem Statement: </h3>
+<p>
+    Your boss is very proud of you for compleating 8 Queens (you should be too!) and wants to show off your work to both your peers and the masses. <br>
+    But 1's and 0's arn't very exciting to look at. Do you think you would be able to make it somehow... fancier?
+</p>
+
+<p>
+    Continueing off our recursive 8 Queens solution (it's okay if you haven't done it, it won't effect your understanding)
+    we modify the print statement to look fancy.
+</p>
+
+<figure>
+    <img src="boxes.PNG" alt="">
+    <figcaption>fig 1:From top to bottom, we have a queen on a black space, a queen on a white space, a black space, and a white space.</figcaption>
+</figure>
+
+<figure>
+    <img src="fancyBoard.PNG" alt="">
+    <figcaption> fig 2: A regular board should look something like this. </figcaption>
+</figure>
+
+<figure>
+    <img src="solution.PNG" alt="">
+    <figcaption> fig 3: and a completed board, like this. </figcaption>
+</figure>
+
+
+<p>
+     Our solution is going to involve <a href="https://venus.cs.qc.cuny.edu/~jchen/CS211/Notes/Typedef/">"typedef"</a> to "create"
+     a new datatype (in reality, we are just repackaging another datatype into something easier to work with). <br>
+     This new datatype we are going to be working with is called "box" which is really just another name for a 5x7 char array. <br>
+     Box will be the basis for how we build all of our unique spaces (fig 1 above).
+</p>
+
+<p> 
+    Question: What is the intuitive datastructre for fancy print? 
+</p>
+
+<p> Answer: (highlight below to see answer) </p> 
+<p style = "background:black; color:black">
+    An 8x8 array of box.
+</p>
+
+<p> 
+    But we can make this even more efficient. Since there is a lot of redundancy between boxes, instead of making the intuitive answer,
+    lets instead make an 8x8 array of <em>pointers</em> to box.
+</p>
+
+<p> 
+    The following steps are then as follows:<br>
+    Each element in fancy print either points to the black space or the white space. <br>
+    At this point, before even having a solution to 8 queens, we should be able to print out fig2. <br>
+    Now, using both the unfancy solution, and the fancy print, we should be able to print the fancy array. <br>
+    All we have to do is point to the respective queen instead of the the empty space. <br> <br>
+
+    There is only one this we haven't covered yet... How do we actually print the board so neatly and on the same lines like in fig2???
+    Hint: fancyBoard[i][j], is a pointer to a box. *(fancyBoard[i][j]) is the actual box itself.
+</p>
