@@ -36,7 +36,7 @@ Like 8 Queens and 8 numbers in a cross, the solution is backtracking.<br>
 
 <ol>
     <li>Start with a default array (an array set to all zero in this case). </li>
-    <li>Begin pairing up the first man and first avalibe woman (a pair in this case is used by the matching array, the index represents the man, the value at that index represent the woman). </li>
+    <li>Begin pairing up the first man and first available woman (a pair in this case is used by the matching array, the index represents the man, the value at that index represent the woman). </li>
     <li>If we have backtracked beyond the first pairing, terminate.</li>
     <li>If we match all people</li>
         <ol>
@@ -44,14 +44,14 @@ Like 8 Queens and 8 numbers in a cross, the solution is backtracking.<br>
             <li>backtrack</li>
             <li>Go back to 3.</li>
         </ol> 
-    <li>Next, pair the next man and the next avalibe woman.</li>
+    <li>Next, pair the next man and the next available woman.</li>
     <li>Check to see if there is an unstable matching.</li>
     <ol>
         <li>If there is not </li>
         Go back to 3.
         <li> there is a unstable matching</li>
-        Pair the man with the next avalibe woman. 
-        If there are no more avalible woman, backtrack (in this case backtracking means breaking up the current couple, and matching the man with the next avalibe woman).
+        Pair the man with the next available woman. 
+        If there are no more available woman, backtrack (in this case backtracking means breaking up the current couple, and matching the man with the next available woman).
 
         Go back to 3.
     </ol>
