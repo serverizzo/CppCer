@@ -15,11 +15,29 @@
 
 <p> <a href = "https://repl.it/@CerverizzoE/8Queens-2D-withGoto-For-studentUse" target = "_blank"> Template using goto statements </a></p>
 
-<a href = http://engineerwithoutfear.github.io/web_dev/visualizations-algorithms/8-queens-backtracking/index.html> Here is a visual to demonstrate the algorithm we will use.</a>
+<a target = "_blank" href = http://engineerwithoutfear.github.io/web_dev/visualizations-algorithms/8-queens-backtracking/index.html> Here is a visual to demonstrate the algorithm we will use.</a>
 <p>
     Take note of how the algorithm moves through the board. Could you write down the steps it does exactly?
 </p>
 
+<p> How the algorithm should move: (highlight below to see the answer) </p>
+<p class = "hideText">
+    <ol class = "hideText">
+        <li> 1) Start queen at the top of the current column (if this is our first time we are starting in the first column).<br></li>
+        <li> 2) check to see if the current space is ok </li>
+            <ul>
+                <li> 2.1) check diagonalUp</li>
+                <li> 2.2) check Left</li>    
+                <li> 2.3) check diagonalDown</li>
+            </ul>
+        <li> 3) If it is ok, move to next column and start from 1.</li>    
+        <li>  4) If it is not ok, move to next row. </li> 
+        <li> 5) If during this process, we move beyond the last row, we backtrack </li>
+        <li> 6) If during this process, we move beyond the last column, we have found 1 solution. </li>
+                    
+                    
+    </ol>
+</p>
 
 <!-- <p>
     Note: Completing the assignment using gotos is manditory for credit. </br>
