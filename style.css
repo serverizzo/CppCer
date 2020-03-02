@@ -11,3 +11,8 @@ body{
 #quoteContainer{
     margin-left: 20px;
 }
+
+.hideText{
+    background:black;
+    color:black";
+}
