@@ -1,0 +1,110 @@
+                                                             /*
+Notes before starting:
+  0 is the most preferable, 2 is the least (for a 3 men and woman)
+*/
+#include <iostream>
+using namespace std;
+
+struct Solution{
+
+  int n = 3;
+  int matching[3] = {0,1,2}; // initialize all elements as 0.
+                            //male prefference for woman
+  int mp[3][3] = {{0,2,1},   //man 0 likes woman 0 the most and woman 1 the least.
+                  {0,2,1},
+                  {1,2,0}};   
+  
+  int wp[3][3] = {{2,1,0},
+                  {0,1,2},
+                  {2,0,1}};
+                  
+  void printMatching(){
+    for ( int i = 0; i < n; i++ ){
+      cout << "male: " << i << " and female: " << matching[i] << endl;
+    }
+    cout << endl;
+  }
+
+  bool isAlreadyTaken(int currMale){
+    for (int i=0; i<currMale; i++){
+      if(matching[i] == matching[currMale]) return true;
+    }
+    return false;
+  }
+
+  bool isStable(int curr){
+    for (int i=0; i<curr; i++){
+      if(
+          (mp[curr][matching[i]] < mp[curr][matching[curr]] and wp[matching[curr]][i]<wp[matching[i]][i]) or 
+          (mp[i][matching[curr]] < mp[i][matching[i]] and wp[matching[i]][curr] < wp[matching[curr]][curr])
+        )
+       return false;
+    }
+    return true;
+  }
+
+
+  bool ok(int currMale){
+    if (!isAlreadyTaken(currMale) and isStable(currMale)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+  void solve(){
+
+    //Start with the first male
+    int currMale = 0;
+    
+    
+    // While we have not backtracked beyond the first male:
+    while (currMale>-1){
+      
+      // If all the people have been matched, 
+      if(currMale > 2){
+        // print 
+        printMatching();
+        // backtrack
+        currMale -= 1;
+        matching[currMale]+=1;
+        continue;
+      }
+
+      // If the current male has been matched with all the avalible women
+      if (matching[currMale] > 2){
+        //reset current male
+        matching[currMale] = 0;
+        //backtrack
+        currMale -= 1;
+        matching[currMale] += 1;
+        continue;
+      }
+      
+      //check if the matching is stable
+      if( ok(currMale)){
+          // move to the next man
+          currMale += 1;
+      }
+      else{
+        // pair the man with the next avalible woman
+        matching[currMale] += 1;
+
+      }
+    }
+  }
+
+
+
+};
+
+
+
+int main() {
+
+  Solution s;
+  s.solve();
+  std::cout << "finished" <<endl;
+}
