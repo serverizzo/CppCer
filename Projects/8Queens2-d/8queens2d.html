@@ -18,9 +18,9 @@
     Take note of how the algorithm moves through the board. Could you write down the steps it does exactly?
 </p>
 
-<p> How the algorithm should move: (highlight below to see the answer) </p>
-<p class = "hideText">
-    <ol class = "hide">
+<p> How the algorithm should move:  <button onclick="show()">Show</button></p>
+<div id = "hiddenDiv" style = "display : none">
+    <ol >
         <li> 1) Start queen at the top of the current column (if this is our first time we are starting in the first column).<br></li>
         <li> 2) check to see if the current space is ok </li>
             <ul>
@@ -33,7 +33,7 @@
         <li> 5) If during this process, we move beyond the last row, we backtrack </li>
         <li> 6) If during this process, we move beyond the last column, we have found 1 solution. </li>
     </ol>
-</p>
+</div>
 
 <!-- <p>
     Note: Completing the assignment using gotos is manditory for credit. </br>
@@ -43,5 +43,4 @@
 <a href = "https://repl.it/@CerverizzoE/8queens-2D-cleaned-recursive-ForStudentUse" target = "_blank"> Template using recursion </a> </br>
 <a href = "https://repl.it/@CerverizzoE/8queens-2D-cleaned-recursive" target = "_blank">Solution to recursive solution</a> -->
 
-
-
+<script src = ../../showScript.js></script>
