@@ -1,0 +1,71 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Solution{
+public:
+  // Create an array of vectors
+  vector<int> t[3];
+  int maxHeight;
+
+  Solution(int numOfDisks){
+    // initilize first tower
+    for(int i = numOfDisks; i > 0; i--){
+      t[0].push_back(i);
+    }
+
+    maxHeight = numOfDisks;
+
+    print2();
+    solve(numOfDisks, 0, 2, 1); // start from the first, end at the last.
+    print2();
+  }
+
+  void print(){
+    for (int i = 0; i < 3; i++){
+      cout << "|"; // to represent a tower beginning
+      for(int j = 0; j < t[i].size(); j++){
+        cout << t[i][j] << "  ";
+      }
+      // new line is the next tower
+      cout << endl;
+    }
+    // new line for seperating towers
+    cout << endl;
+  }
+
+  void print2(){
+    for (int j = maxHeight-1; j > -1; j--){
+      for (int i = 0; i < 3; i++){
+        if (t[i].size() <= j){ cout << " ";}
+        else{ cout << t[i][j]; }
+        cout << " ";
+      }
+      cout << endl;
+    }
+    cout << "_ _ _" << endl;
+  }
+
+  void solve(int n, int from, int to, int aux){
+    if (n == 1){
+      t[to].push_back(t[from].back());
+      t[from].pop_back();
+      return;
+    }
+    
+    solve(n-1, from, aux, to);
+    print2();
+    t[to].push_back(t[from].back());
+    t[from].pop_back();
+    print2();
+    solve(n-1, aux, to, from);
+  }
+
+};
+
+
+int main() {
+  Solution s(5);
+  cout << "finished" <<endl;
+}
