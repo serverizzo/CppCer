@@ -6,6 +6,7 @@ class quoteGenerator{
     constructor(){
 
         this.quotes = [
+            ["It does not do to dwell on dreams and forget to live", "Albus Dumbledore"],
             ["Never give up and good luck will find you.", "Falcor"],
             ["The real secret to sucess is enthusiasm","Walter Chrysler"],
             ["Fear is the mind killer", "Frank Herbert"],
